@@ -24,6 +24,10 @@ class WeatherViewController: UIViewController {
     super.viewDidLoad()
     self.searchTextField.delegate = self
   }
+  
+  @IBAction func searchWeather(_ sender: UIButton) {
+    self.searchTextField.endEditing(true)
+  }
 }
 
 extension WeatherViewController: UITextFieldDelegate {
