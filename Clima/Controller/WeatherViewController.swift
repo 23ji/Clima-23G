@@ -18,6 +18,8 @@ class WeatherViewController: UIViewController {
   @IBOutlet weak var searchTextField: UITextField!
   
   
+  private var weatherManager = WeatherManager()
+  
   // MARK: - Life Cycle
   
   override func viewDidLoad() {
@@ -47,6 +49,7 @@ extension WeatherViewController: UITextFieldDelegate {
   func textFieldDidEndEditing(_ textField: UITextField) {
     guard let cityName = self.searchTextField.text else { return }
     self.searchTextField.text = ""
+    weatherManager.featchWeather(cityName: cityName)
   }
 }
 
