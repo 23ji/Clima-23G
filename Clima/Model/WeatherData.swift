@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct WeatherData {
-  var cityName: Name
-  var temperature: Main
+struct WeatherData: Decodable {
+  var name: Name
+  var temp: Main
   var id: [Weather]
 }
 
 struct Name: Decodable{
-  var cityName: String
+  var name: String
 }
 
 struct Main: Decodable{

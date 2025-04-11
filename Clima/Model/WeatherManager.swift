@@ -26,14 +26,14 @@ struct WeatherManager {
       guard error == nil else { return }
       guard let data = data else { return }
       
-      
-      
-      
+      //data JSON 디코딩
+      //데이터 파싱해야함
+      self.parseData(data: data)
     }
-    
     task.resume()
-
   }
   
-  
+  func parseData(data: Data) {
+    let weatherDataDTO = try? JSONDecoder().decode(WeatherData.self, from: data)
+  }
 }
