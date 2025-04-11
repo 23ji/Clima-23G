@@ -56,6 +56,8 @@ struct WeatherManager {
     task.resume()
   }
   
+  private func parseJson(
+  
   // 날씨 데이터를 표시한다.
   
  
