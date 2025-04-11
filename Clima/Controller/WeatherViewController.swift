@@ -25,9 +25,10 @@ class WeatherViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.searchTextField.delegate = self
+    self.weatherManager.delegate = self
   }
   
-  @IBAction func searchWeather(_ sender: UIButton) {
+  @IBAction func searchWeather(_ sender: Any) {
     self.searchTextField.endEditing(true)
   }
 }
@@ -36,8 +37,10 @@ extension WeatherViewController: UITextFieldDelegate {
   // 리턴키 눌렸을 때 값 들어오는거 확인
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     guard self.searchTextField.text != "" else { return false }
+    textField.resignFirstResponder()
     return true
   }
+  
   
   // 사용자 입력이 끝났을 때
   func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -53,3 +56,12 @@ extension WeatherViewController: UITextFieldDelegate {
   }
 }
 
+extension WeatherViewController: WeatherManagerDelegate{
+  func updateWeather(wether: WeatherModel) {
+    DispatchQueue.main.async {
+      self.conditionImageView.image = UIImage(systemName: wether.conditionName)
+      self.cityLabel.text = wether.cityName
+      self.temperatureLabel.text = wether.stringTemp
+    }
+  }
+}
