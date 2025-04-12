@@ -24,5 +24,21 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
   @IBAction func searchButton(_ sender: Any) {
   }
   
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    guard textField.text != nil else { return false }
+    return true
+  }
+  
+  func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    guard textField.text != nil else { return false }
+    return true
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    guard let text = textField.text else { return }
+    textField.text = ""
+    // 입력된 text를 이용해 날씨 정보 요청
+  }
 }
+
 
