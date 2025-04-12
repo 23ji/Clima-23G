@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var cityLabel: UILabel!
   @IBOutlet weak var searchWeather: UITextField!
 
+  var weathrManager = WeatherManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +23,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
   }
   
   @IBAction func searchButton(_ sender: Any) {
+    self.searchWeather.endEditing(true)
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -38,7 +40,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     guard let text = textField.text else { return }
     textField.text = ""
     // 입력된 text를 이용해 날씨 정보 요청
-    
+    weathrManager.fetchWeather(cityName: text)
   }
 }
 

@@ -23,11 +23,16 @@ struct WeatherManager {
       guard error == nil else { return }
       guard let data = data else { return }
       
-      let weatherDataDTO = self.parseData(data: data)
-      let id = weatherDataDTO?.weather.first?.id
+      guard let weatherDataDTO = self.parseData(data: data) else { return }
+      guard let id = weatherDataDTO.weather.first?.id else { return }
       
+      var weatherModel = WeatherModel(
+        cityName: weatherDataDTO.name,
+        temp: weatherDataDTO.main.temp,
+        conditionID: id
+      )
     }
-
+    task.resume()
   }
   
   func parseData(data: Data)-> WeatherData? { //?
