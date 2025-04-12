@@ -9,16 +9,19 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-
-    @IBOutlet weak var conditionImageView: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
+  
+  @IBOutlet weak var conditionImageView: UIImageView!
+  @IBOutlet weak var temperatureLabel: UILabel!
+  @IBOutlet weak var cityLabel: UILabel!
+  @IBOutlet weak var searchWeather: UITextField!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
-
+  }
+  
+  @IBAction func searchButton(_ sender: Any) {
+  }
+  
 }
 
