@@ -23,10 +23,15 @@ struct WeatherManager {
       guard error == nil else { return }
       guard let data = data else { return }
       
-      //let weatherDataDTO = self.parseData()
+      let weatherDataDTO = self.parseData(data: data)
+      let id = weatherDataDTO?.weather.first?.id
+      
     }
 
   }
   
-  //func parseData(data: Data)->
+  func parseData(data: Data)-> WeatherData? { //?
+    var weatherData = try? JSONDecoder().decode(WeatherData.self, from: data) //Weather.self
+    return weatherData
+  }
 }
