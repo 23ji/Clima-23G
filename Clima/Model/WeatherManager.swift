@@ -11,6 +11,8 @@ import Foundation
 struct WeatherManager {
   let weatherString = "https://api.openweathermap.org/data/2.5/weather?appid=ab2d2e496ebfc6758d71dd007225e58c&units=metric"
   
+  var delegate: WeatherManagerDelegate? //?
+  
   func fetchWeather(cityName: String) {
     guard let weatherURL = URL(string: "\(weatherString)&q=\(cityName)") else { return }
     self.requestWeather(url: weatherURL)
@@ -31,6 +33,9 @@ struct WeatherManager {
         temp: weatherDataDTO.main.temp,
         conditionID: id
       )
+      //업데이트
+      self.delegate?.updateWeather(weatherModel: weatherModel)
+
     }
     task.resume()
   }
@@ -39,4 +44,9 @@ struct WeatherManager {
     var weatherData = try? JSONDecoder().decode(WeatherData.self, from: data) //Weather.self
     return weatherData
   }
+  
+}
+
+protocol WeatherManagerDelegate {
+  func updateWeather(weatherModel: WeatherModel)
 }

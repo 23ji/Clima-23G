@@ -15,11 +15,12 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var cityLabel: UILabel!
   @IBOutlet weak var searchWeather: UITextField!
 
-  var weathrManager = WeatherManager()
+  var weatherManager = WeatherManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.searchWeather.delegate = self
+    self.weatherManager.delegate = self
   }
   
   @IBAction func searchButton(_ sender: Any) {
@@ -40,8 +41,16 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     guard let text = textField.text else { return }
     textField.text = ""
     // 입력된 text를 이용해 날씨 정보 요청
-    weathrManager.fetchWeather(cityName: text)
+    weatherManager.fetchWeather(cityName: text)
   }
 }
 
-
+extension WeatherViewController: WeatherManagerDelegate{
+  func updateWeather(weatherModel: WeatherModel) {
+    DispatchQueue.main.async {
+      self.cityLabel.text = weatherModel.cityName
+      self.conditionImageView.image = UIImage(systemName: weatherModel.weatherName)
+      self.temperatureLabel.text = weatherModel.tempString
+    }
+  }
+}
