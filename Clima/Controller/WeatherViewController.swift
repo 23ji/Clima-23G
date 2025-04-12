@@ -8,16 +8,17 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, UITextFieldDelegate {
   
   @IBOutlet weak var conditionImageView: UIImageView!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var cityLabel: UILabel!
   @IBOutlet weak var searchWeather: UITextField!
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    self.searchWeather.delegate = self
   }
   
   @IBAction func searchButton(_ sender: Any) {
