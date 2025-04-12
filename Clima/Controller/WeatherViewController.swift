@@ -38,6 +38,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     guard let text = textField.text else { return }
     textField.text = ""
     // 입력된 text를 이용해 날씨 정보 요청
+    
   }
 }
 
